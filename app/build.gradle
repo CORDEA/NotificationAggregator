@@ -20,6 +20,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    flavorDimensions "api"
+    productFlavors {
+        prod {
+            dimension "api"
+            def props = new Properties()
+            props.load(file("key.properties").newDataInputStream())
+            buildConfigField "String", "MAILGUN_DOMAIN", props.getProperty("mailgun.domain").trim()
+            buildConfigField "String", "MAILGUN_API_KEY", props.getProperty("mailgun.api.key").trim()
+        }
+    }
 }
 
 dependencies {
