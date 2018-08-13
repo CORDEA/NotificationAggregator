@@ -5,14 +5,21 @@ import android.preference.PreferenceManager
 
 class PreferencesProvider(context: Context) {
     companion object {
-        private const val ACCOUNT_NAME = "account_name"
+        private const val TO = "to"
+        private const val FROM = "from"
     }
 
     private val preferences = PreferenceManager.getDefaultSharedPreferences(context)
 
-    var accountName: String? = null
-        get() = preferences.getString(ACCOUNT_NAME, null)
+    var to: String?
+        get() = preferences.getString(TO, null)
         set(value) {
-            preferences.edit().putString(ACCOUNT_NAME, field).apply()
+            preferences.edit().putString(TO, value).apply()
+        }
+
+    var from: String?
+        get() = preferences.getString(FROM, null)
+        set(value) {
+            preferences.edit().putString(FROM, value).apply()
         }
 }
